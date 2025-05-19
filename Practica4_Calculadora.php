@@ -2,17 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mini Calculadora</title>
+  <title>Calculadora</title>
   <style>
     body {
-      background: #1e1e2f;
+      background:rgb(7, 160, 243);
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 50px;
     }
     form {
-      background: #2a2a40;
+      background:rgb(91, 201, 228);
       padding: 30px;
       border-radius: 10px;
       display: inline-block;
@@ -36,58 +36,54 @@
     .resultado {
       margin-top: 20px;
       font-size: 20px;
-      color: #00ffcc;
+      color:rgb(10, 40, 233);
     }
   </style>
 </head>
 <body>
 
-  <h1>🧮 Mini Calculadora PHP</h1>
+  <h1>Calculadora </h1>
 
-  <form method="POST">
+  <form method="GET">
     <input type="number" name="num1" placeholder="Primer número" required>
     <input type="number" name="num2" placeholder="Segundo número" required><br>
 
     <select name="operacion" required>
-      <option value="">Selecciona una operación</option>
-      <option value="suma">Suma</option>
-      <option value="resta">Resta</option>
-      <option value="multiplicacion">Multiplicación</option>
-      <option value="division">División</option>
+      <option value="">Elige operación</option>
+      <option value="+">+</option>
+      <option value="-">−</option>
+      <option value="*">×</option>
+      <option value="/">÷</option>
     </select><br>
 
     <input type="submit" name="calcular" value="Calcular">
   </form>
 
   <?php
-  if (isset($_POST['calcular'])) {
-    $num1 = $_POST['num1'];
-    $num2 = $_POST['num2'];
-    $operacion = $_POST['operacion'];
+  if (isset($_GET['calcular'])) {
+    $num1 = $_GET['num1'];
+    $num2 = $_GET['num2'];
+    $op = $_GET['operacion'];
     $resultado = "";
 
-    switch ($operacion) {
-      case "suma":
+    switch ($op) {
+      case '+':
         $resultado = $num1 + $num2;
         break;
-      case "resta":
+      case '-':
         $resultado = $num1 - $num2;
         break;
-      case "multiplicacion":
+      case '*':
         $resultado = $num1 * $num2;
         break;
-      case "division":
-        if ($num2 != 0) {
-          $resultado = $num1 / $num2;
-        } else {
-          $resultado = "No se puede dividir entre 0";
-        }
+      case '/':
+        $resultado = ($num2 != 0) ? $num1 / $num2 : "Error: división por cero";
         break;
       default:
-        $resultado = "Operación no válida";
+        $resultado = "Operación inválida";
     }
 
-    echo "<div class='resultado'>Resultado: <strong>$resultado</strong></div>";
+    echo "<div class='resultado'><strong>$resultado</strong></div>";
   }
   ?>
 
